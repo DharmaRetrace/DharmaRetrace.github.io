@@ -1,139 +1,61 @@
+<!-- index.html -->
 <!DOCTYPE html>
-<html lang="zh">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>月相计算器</title>
-    <!-- 引入 PyScript 样式与脚本 -->
-    <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />
-    <script defer src="https://pyscript.net/latest/pyscript.js"></script>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>我的博客</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>我的博客</h1>
+      <nav>
+        <ul>
+          <li><a href="#about">个人介绍</a></li>
+          <li><a href="#achievements">成果公开</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
 
-    <!-- 引入外部 CSS -->
-    <link rel="stylesheet" href="styles.css" />
+  <main>
+    <section id="about">
+      <div class="container">
+        <h2>关于我</h2>
+        <p>欢迎来到我的博客！我是一个热爱生活、追求内心平静的佛教徒，我相信“一花一世界，一叶一菩提”。在这个喧嚣的世界中，佛法给予我宁静与智慧，每一天都是修行，每一步都充满意义。</p>
+      </div>
+    </section>
 
-    <py-config>
-      packages = [
-        "pytz",
-        "ephem",
-        "astral",
-        "timezonefinder",
-        "geopy"
-      ]
-    </py-config>
-  </head>
-  <body>
-    <h1>月相计算器</h1>
-    <p>请输入纬度和经度：</p>
-    <input id="lat" type="text" placeholder="纬度（例如：39.90）">
-    <input id="lon" type="text" placeholder="经度（例如：116.40）">
-    <button id="calc">计算月相</button>
-    <pre id="output"></pre>
+    <section id="achievements">
+      <div class="container">
+        <h2>成果公开</h2>
+        <div class="achievements-grid">
+          <div class="achievement-item">
+            <h3>博客上线</h3>
+            <p>全新的博客上线，融合科技与佛法智慧，分享生活中的点滴感悟。</p>
+          </div>
+          <div class="achievement-item">
+            <h3>开源项目</h3>
+            <p>积极参与多个开源项目，将技术与内心修行有机融合，传播正能量。</p>
+          </div>
+          <div class="achievement-item">
+            <h3>数字佛法教育</h3>
+            <p>利用数字化手段普及佛学智慧，让更多人受益于古老而深邃的佛法。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
 
-    <!-- PyScript 中嵌入你的 Python 逻辑 -->
-    <py-script>
-import datetime
-import pytz
-import ephem
-from astral.sun import sun
-from astral import Observer
-from timezonefinder import TimezoneFinder
-from geopy.geocoders import Nominatim
+  <footer>
+    <div class="container">
+      <p>© 2025 我的博客 - 南无阿弥陀佛</p>
+    </div>
+  </footer>
 
-def calculate_moon_events(lat_str, lon_str):
-    try:
-        lat = float(lat_str)
-        lon = float(lon_str)
-    except ValueError:
-        return "输入的经纬度格式错误，请输入数字。"
-
-    try:
-        geolocator = Nominatim(user_agent="moon_app")
-        location = geolocator.reverse(f"{lat}, {lon}", language="zh")
-    except Exception as e:
-        location = None
-
-    output_text = ""
-    if location is not None:
-        output_text += f"反向地理编码结果: {location.address}\n"
-    else:
-        output_text += "无法获取所在地区名称\n"
-
-    tf = TimezoneFinder()
-    tz_name = tf.timezone_at(lat=lat, lng=lon)
-    if tz_name is None:
-        tz_name = "UTC"
-        output_text += "无法确定时区，默认使用 UTC\n"
-    tz = pytz.timezone(tz_name)
-    output_text += f"使用时区: {tz_name}\n"
-
-    days = 100
-    today_local = datetime.datetime.now(tz).date()
-    sunrise_list = []
-    for i in range(days + 1):
-        day = today_local + datetime.timedelta(days=i)
-        obs = Observer(latitude=lat, longitude=lon)
-        s = sun(obs, date=day, tzinfo=tz)
-        sunrise_list.append(s['sunrise'])
-
-    sunrise_nodes = []
-    for i in range(days):
-        node = {
-            'start': sunrise_list[i],
-            'end': sunrise_list[i + 1],
-            'date': sunrise_list[i].date(),
-            'events': []
-        }
-        sunrise_nodes.append(node)
-
-    nodes_start = sunrise_nodes[0]['start']
-    nodes_end = sunrise_nodes[-1]['end']
-    range_start_utc = nodes_start.astimezone(pytz.utc)
-    range_end_utc = nodes_end.astimezone(pytz.utc)
-    ephem_start = ephem.Date(range_start_utc)
-    ephem_end = ephem.Date(range_end_utc)
-    moon_events = []
-
-    cur_new = ephem.previous_new_moon(ephem_start)
-    while True:
-        nm_utc = cur_new.datetime().replace(tzinfo=pytz.utc)
-        cur_fm = ephem.next_full_moon(cur_new)
-        fm_utc = cur_fm.datetime().replace(tzinfo=pytz.utc)
-        next_new = ephem.next_new_moon(cur_new)
-        n2_utc = next_new.datetime().replace(tzinfo=pytz.utc)
-        half_wax = nm_utc + (fm_utc - nm_utc) / 2
-        half_wan = fm_utc + (n2_utc - fm_utc) / 2
-
-        if range_start_utc <= nm_utc <= range_end_utc:
-            moon_events.append({'time': nm_utc.astimezone(tz), 'type': '新月'})
-        if range_start_utc <= half_wax <= range_end_utc:
-            moon_events.append({'time': half_wax.astimezone(tz), 'type': '半月'})
-        if range_start_utc <= fm_utc <= range_end_utc:
-            moon_events.append({'time': fm_utc.astimezone(tz), 'type': '满月'})
-        if range_start_utc <= half_wan <= range_end_utc:
-            moon_events.append({'time': half_wan.astimezone(tz), 'type': '半月'})
-
-        if next_new > ephem_end:
-            break
-        cur_new = next_new
-
-    moon_events.sort(key=lambda x: x['time'])
-    for event in moon_events:
-        for node in sunrise_nodes:
-            if node['start'] <= event['time'] < node['end']:
-                node['events'].append(event)
-                break
-
-    output_text += "\n包含月相事件的日节点（日期及事件）：\n"
-    for node in sunrise_nodes:
-        if node['events']:
-            output_text += f"{node['date'].strftime('%Y-%m-%d')}:\n"
-            for event in node['events']:
-                output_text += f"   {event['type']} : {event['time'].strftime('%Y-%m-%d %H:%M:%S')}\n"
-            output_text += "\n"
-    return output_text
-    </py-script>
-
-    <!-- 引入外部 JavaScript -->
-    <script src="script.js"></script>
-  </body>
+  <script src="js/script.js"></script>
+</body>
 </html>
+
