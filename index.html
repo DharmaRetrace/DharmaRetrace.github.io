@@ -287,7 +287,7 @@
     <script>
       // DOM 加载完成后初始化交互效果
       document.addEventListener("DOMContentLoaded", () => {
-        // 粒子背景初始化
+        // 粒子背景初始化：禁用点击事件，点击时背景动效保持不变
         particlesJS("particles-js", {
           particles: {
             number: { value: 80 },
@@ -302,14 +302,15 @@
               random: true,
               straight: false,
               out_mode: "out",
-              bounce: false,
-            },
+              bounce: false
+            }
           },
           interactivity: {
             events: {
               onhover: { enable: true, mode: "repulse" },
-            },
-          },
+              onclick: { enable: false }
+            }
+          }
         });
 
         // 卡片悬停光效
