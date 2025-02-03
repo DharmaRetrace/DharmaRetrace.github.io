@@ -1,0 +1,48 @@
+/* 基础样式 */
+body {
+  margin: 20px;
+  font-family: sans-serif;
+  line-height: 1.6;
+}
+
+/* 输入框和按钮统一样式 */
+input,
+button {
+  padding: 8px;
+  margin: 5px;
+  font-size: 16px;
+}
+
+/* 输入框：宽度自适应，最大宽度300px */
+input {
+  width: calc(100% - 20px);
+  max-width: 300px;
+  box-sizing: border-box;
+}
+
+/* 按钮样式 */
+button {
+  cursor: pointer;
+}
+
+/* 输出区：背景色、内边距、滚动条 */
+pre {
+  background: #f0f0f0;
+  padding: 10px;
+  max-height: 400px;
+  overflow-y: auto;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+/* 移动端优化：保证页面在窄屏设备上的可读性 */
+@media screen and (max-width: 600px) {
+  body {
+    margin: 10px;
+  }
+
+  input,
+  button {
+    font-size: 18px;
+  }
+}
