@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>月相计算器</title>
+    <!-- 引入 PyScript 样式与脚本 -->
+    <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />
+    <script defer src="https://pyscript.net/latest/pyscript.js"></script>
+
+    <!-- 引入外部 CSS -->
+    <link rel="stylesheet" href="styles.css" />
+
+    <py-config>
+      packages = [
+        "pytz",
+        "ephem",
+        "astral",
+        "timezonefinder",
+        "geopy"
+      ]
+    </py-config>
+  </head>
+  <body>
+    <h1>月相计算器</h1>
+    <p>请输入纬度和经度：</p>
+    <input id="lat" type="text" placeholder="纬度（例如：39.90）">
+    <input id="lon" type="text" placeholder="经度（例如：116.40）">
+    <button id="calc">计算月相</button>
+    <pre id="output"></pre>
+
+    <!-- PyScript 中嵌入你的 Python 逻辑 -->
+    <py-script>
+import datetime
+import pytz
+import ephem
+from astral.sun import sun
+from astral import Observer
+from timezonefinder import TimezoneFinder
+from geopy.geocoders import Nominatim
+
+def calculate_moon_events(lat_str, lon_str):
+    try:
+        lat = float(lat_str)
+        lon = float(lon_str)
+    except ValueError:
+        return "输入的经纬度格式错误，请输入数字。"
+
+    try:
+        geolocator = Nominatim(user_agent="moon_app")
+        location = geolocator.reverse(f"{lat}, {lon}", language="zh")
+    except Exception as e:
+        location = None
+
+    output_text = ""
+    if location is not None:
+        output_text += f"反向地理编码结果: {location.address}\n"
+    else:
+        output_text += "无法获取所在地区名称\n"
+
+    tf = TimezoneFinder()
+    tz_name = tf.timezone_at(lat=lat, lng=lon)
+    if tz_name is None:
+        tz_name = "UTC"
+        output_text += "无法确定时区，默认使用 UTC\n"
+    tz = pytz.timezone(tz_name)
+    output_text += f"使用时区: {tz_name}\n"
+
+    days = 100
+    today_local = datetime.datetime.now(tz).date()
+    sunrise_list = []
+    for i in range(days + 1):
+        day = today_local + datetime.timedelta(days=i)
+        obs = Observer(latitude=lat, longitude=lon)
+        s = sun(obs, date=day, tzinfo=tz)
+        sunrise_list.append(s['sunrise'])
+
+    sunrise_nodes = []
+    for i in range(days):
+        node = {
+            'start': sunrise_list[i],
+            'end': sunrise_list[i + 1],
+            'date': sunrise_list[i].date(),
+            'events': []
+        }
+        sunrise_nodes.append(node)
+
+    nodes_start = sunrise_nodes[0]['start']
+    nodes_end = sunrise_nodes[-1]['end']
+    range_start_utc = nodes_start.astimezone(pytz.utc)
+    range_end_utc = nodes_end.astimezone(pytz.utc)
+    ephem_start = ephem.Date(range_start_utc)
+    ephem_end = ephem.Date(range_end_utc)
+    moon_events = []
+
+    cur_new = ephem.previous_new_moon(ephem_start)
+    while True:
+        nm_utc = cur_new.datetime().replace(tzinfo=pytz.utc)
+        cur_fm = ephem.next_full_moon(cur_new)
+        fm_utc = cur_fm.datetime().replace(tzinfo=pytz.utc)
+        next_new = ephem.next_new_moon(cur_new)
+        n2_utc = next_new.datetime().replace(tzinfo=pytz.utc)
+        half_wax = nm_utc + (fm_utc - nm_utc) / 2
+        half_wan = fm_utc + (n2_utc - fm_utc) / 2
+
+        if range_start_utc <= nm_utc <= range_end_utc:
+            moon_events.append({'time': nm_utc.astimezone(tz), 'type': '新月'})
+        if range_start_utc <= half_wax <= range_end_utc:
+            moon_events.append({'time': half_wax.astimezone(tz), 'type': '半月'})
+        if range_start_utc <= fm_utc <= range_end_utc:
+            moon_events.append({'time': fm_utc.astimezone(tz), 'type': '满月'})
+        if range_start_utc <= half_wan <= range_end_utc:
+            moon_events.append({'time': half_wan.astimezone(tz), 'type': '半月'})
+
+        if next_new > ephem_end:
+            break
+        cur_new = next_new
+
+    moon_events.sort(key=lambda x: x['time'])
+    for event in moon_events:
+        for node in sunrise_nodes:
+            if node['start'] <= event['time'] < node['end']:
+                node['events'].append(event)
+                break
+
+    output_text += "\n包含月相事件的日节点（日期及事件）：\n"
+    for node in sunrise_nodes:
+        if node['events']:
+            output_text += f"{node['date'].strftime('%Y-%m-%d')}:\n"
+            for event in node['events']:
+                output_text += f"   {event['type']} : {event['time'].strftime('%Y-%m-%d %H:%M:%S')}\n"
+            output_text += "\n"
+    return output_text
+    </py-script>
+
+    <!-- 引入外部 JavaScript -->
+    <script src="script.js"></script>
+  </body>
+</html>
