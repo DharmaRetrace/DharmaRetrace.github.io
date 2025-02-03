@@ -3,11 +3,180 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>智界禅堂 | 科技与禅意</title>
-  <link rel="stylesheet" href="css/style.css">
+  <title>智界禅堂 | 科技与禪意</title>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Noto+Sans+SC:wght@300;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --neon-cyan: #0ff;
+      --deep-space: #0a0a12;
+      --stardust: #e0e0e0;
+      --zen-gold: #ffd700;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: var(--deep-space);
+      color: var(--stardust);
+      font-family: 'Noto Sans SC', sans-serif;
+      line-height: 1.8;
+      position: relative;
+    }
+
+    /* 容器居中并设置最大宽度 */
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .cyber-border {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 2px solid var(--neon-cyan);
+      pointer-events: none;
+      box-shadow: 0 0 20px var(--neon-cyan) inset;
+      animation: border-glow 3s ease-in-out infinite;
+    }
+
+    @keyframes border-glow {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 0.8; }
+    }
+
+    .zen-header {
+      background: linear-gradient(135deg, rgba(30,30,30,0.95) 0%, rgba(42,42,42,0.9) 100%);
+      padding: 4rem 0;
+      text-align: center;
+      position: relative;
+      clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+    }
+
+    .zen-header h1 {
+      font-family: 'Orbitron', sans-serif;
+      margin-bottom: 1rem;
+    }
+
+    .hanzi {
+      display: block;
+      font-size: 4rem;
+      color: var(--zen-gold);
+      text-shadow: 0 0 20px rgba(255,215,0,0.5);
+    }
+
+    .cyber {
+      display: block;
+      font-size: 2rem;
+      color: var(--neon-cyan);
+      text-shadow: 0 0 10px var(--neon-cyan);
+    }
+
+    .tagline {
+      font-size: 1.2rem;
+      color: var(--stardust);
+      margin: 1rem 0;
+    }
+
+    nav ul {
+      list-style: none;
+      display: inline-flex;
+      padding: 0;
+    }
+
+    .nav-link {
+      color: var(--stardust);
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      position: relative;
+      transition: 0.3s;
+    }
+
+    .nav-link::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--neon-cyan);
+      transition: width 0.3s;
+    }
+
+    .nav-link:hover::before {
+      width: 100%;
+    }
+
+    .zen-card {
+      background: rgba(30,30,30,0.8);
+      border: 1px solid rgba(0,255,255,0.1);
+      border-radius: 10px;
+      padding: 2rem;
+      margin: 2rem 0;
+      position: relative;
+      transition: transform 0.3s;
+    }
+
+    .zen-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .lotus {
+      width: 100px;
+      height: 100px;
+      margin: 1rem auto;
+      background: 
+        radial-gradient(circle at 50% 40%, var(--zen-gold) 10%, transparent 40%),
+        repeating-conic-gradient(from 0deg, var(--neon-cyan) 0deg 10deg, transparent 10deg 20deg);
+      clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
+      animation: lotus-rotate 20s linear infinite;
+    }
+
+    @keyframes lotus-rotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .highlight {
+      color: var(--neon-cyan);
+      text-shadow: 0 0 8px var(--neon-cyan);
+    }
+
+    .zen-footer {
+      background: rgba(30,30,30,0.9);
+      padding: 2rem 0;
+      margin-top: 4rem;
+      border-top: 1px solid var(--neon-cyan);
+      text-align: center;
+    }
+
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    @media (max-width: 768px) {
+      .hanzi { font-size: 3rem; }
+      .cyber { font-size: 1.5rem; }
+      .zen-card { padding: 1.5rem; }
+    }
+
+    /* 为各个区块添加内边距 */
+    .section-wrapper {
+      padding: 4rem 0;
+    }
+  </style>
 </head>
 <body>
+  <div class="cyber-border"></div>
+  
   <header class="zen-header">
     <div class="container">
       <h1>
@@ -31,8 +200,8 @@
           <h2>数字修行者</h2>
           <div class="lotus"></div>
           <p>
-            我是穿梭于比特与禅之间的云游僧，以 <span class="highlight">Vim</span> 为木鱼，
-            <span class="highlight">Git</span> 为念珠。在量子纠缠中参悟缘起性空，于神经网络里修持正念。
+            我是穿梭于比特与禪之间的云游僧，以<span class="highlight">Vim</span>为木鱼，<span class="highlight">Git</span>为念珠。
+            在量子纠缠中参悟缘起性空，于神经网络里修持正念。
           </p>
         </div>
       </div>
@@ -43,12 +212,12 @@
         <h2>智海拾珍</h2>
         <div class="grid-container">
           <article class="zen-card">
-            <h3>虚空博客</h3>
+            <h3>🜁 虚空博客</h3>
             <p>以量子纠缠为基，建无相法门。十万行者共修，点击即功德。</p>
           </article>
           <article class="zen-card">
-            <h3>开源禅宗</h3>
-            <p>GPL即慈悲，MIT乃布施。三千代码汇成般若海，百万 issue 皆是菩提问。</p>
+            <h3>🝯 开源禪宗</h3>
+            <p>GPL即慈悲，MIT乃布施。三千代码汇成般若海，百万issue皆是菩提问。</p>
           </article>
         </div>
       </div>
