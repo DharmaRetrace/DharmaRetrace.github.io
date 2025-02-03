@@ -1,233 +1,337 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>智界禅堂 | 科技与禪意</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Noto+Sans+SC:wght@300;500&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --neon-cyan: #0ff;
-      --deep-space: #0a0a12;
-      --stardust: #e0e0e0;
-      --zen-gold: #ffd700;
-    }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>智界禅堂 | 科技与佛法的交响</title>
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Noto+Sans+SC:wght@300;500&family=Srisakdi&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* 内嵌 CSS 样式 */
+      :root {
+        --neon-cyan: #0ff;
+        --deep-space: #0a0a12;
+        --stardust: #e0e0e0;
+        --void: rgba(0, 0, 0, 0.8);
+        --mantra-gold: #ffd700;
+        --sutra-blue: #3d5afe;
+      }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
-    body {
-      background: var(--deep-space);
-      color: var(--stardust);
-      font-family: 'Noto Sans SC', sans-serif;
-      line-height: 1.8;
-      position: relative;
-    }
+      body {
+        background: var(--deep-space);
+        color: var(--stardust);
+        font-family: 'Noto Sans SC', sans-serif;
+        line-height: 1.8;
+        overflow-x: hidden;
+      }
 
-    /* 容器居中并设置最大宽度 */
-    .container {
-      width: 90%;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
+      #particles-js {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+      }
 
-    .cyber-border {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      border: 2px solid var(--neon-cyan);
-      pointer-events: none;
-      box-shadow: 0 0 20px var(--neon-cyan) inset;
-      animation: border-glow 3s ease-in-out infinite;
-    }
+      .container {
+        width: 85%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem 0;
+      }
 
-    @keyframes border-glow {
-      0%, 100% { opacity: 0.3; }
-      50% { opacity: 0.8; }
-    }
+      .glass-header {
+        position: relative;
+        background: linear-gradient(
+          135deg,
+          rgba(30, 30, 30, 0.9) 0%,
+          rgba(42, 42, 42, 0.7) 100%
+        );
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid rgba(0, 255, 255, 0.2);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        padding: 4rem 0;
+        text-align: center;
+        z-index: 2;
+      }
 
-    .zen-header {
-      background: linear-gradient(135deg, rgba(30,30,30,0.95) 0%, rgba(42,42,42,0.9) 100%);
-      padding: 4rem 0;
-      text-align: center;
-      position: relative;
-      clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
-    }
+      .glass-header h1 {
+        font-family: 'Orbitron', sans-serif;
+        font-size: 3.5rem;
+        color: var(--neon-cyan);
+        text-shadow: 0 0 15px var(--neon-cyan);
+        position: relative;
+        margin-bottom: 1rem;
+      }
 
-    .zen-header h1 {
-      font-family: 'Orbitron', sans-serif;
-      margin-bottom: 1rem;
-    }
+      .glass-header h1::after {
+        content: attr(data-text);
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: -1;
+        color: transparent;
+        -webkit-text-stroke: 2px var(--sutra-blue);
+      }
 
-    .hanzi {
-      display: block;
-      font-size: 4rem;
-      color: var(--zen-gold);
-      text-shadow: 0 0 20px rgba(255,215,0,0.5);
-    }
+      .tagline {
+        font-family: 'Srisakdi', cursive;
+        font-size: 1.5rem;
+        color: var(--mantra-gold);
+        margin-bottom: 2rem;
+      }
 
-    .cyber {
-      display: block;
-      font-size: 2rem;
-      color: var(--neon-cyan);
-      text-shadow: 0 0 10px var(--neon-cyan);
-    }
+      nav ul {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        padding: 1rem;
+      }
 
-    .tagline {
-      font-size: 1.2rem;
-      color: var(--stardust);
-      margin: 1rem 0;
-    }
+      nav a {
+        color: var(--stardust);
+        text-decoration: none;
+        font-size: 1.1rem;
+        position: relative;
+        padding: 0.5rem 1rem;
+        transition: all 0.3s ease;
+      }
 
-    nav ul {
-      list-style: none;
-      display: inline-flex;
-      padding: 0;
-    }
+      nav a::before {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: var(--neon-cyan);
+        transition: width 0.3s;
+      }
 
-    .nav-link {
-      color: var(--stardust);
-      text-decoration: none;
-      padding: 0.5rem 1rem;
-      position: relative;
-      transition: 0.3s;
-    }
+      nav a:hover::before {
+        width: 100%;
+      }
 
-    .nav-link::before {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background: var(--neon-cyan);
-      transition: width 0.3s;
-    }
+      .glass-card {
+        position: relative;
+        background: rgba(30, 30, 30, 0.6);
+        border: 1px solid rgba(0, 255, 255, 0.1);
+        border-radius: 15px;
+        padding: 2rem;
+        backdrop-filter: blur(5px);
+        transition: transform 0.3s, box-shadow 0.3s;
+        overflow: hidden;
+      }
 
-    .nav-link:hover::before {
-      width: 100%;
-    }
+      .glass-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 10px 30px rgba(0, 255, 255, 0.2);
+      }
 
-    .zen-card {
-      background: rgba(30,30,30,0.8);
-      border: 1px solid rgba(0,255,255,0.1);
-      border-radius: 10px;
-      padding: 2rem;
-      margin: 2rem 0;
-      position: relative;
-      transition: transform 0.3s;
-    }
+      .card-halo {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 15px;
+        background: radial-gradient(
+          circle at 50% 0%,
+          rgba(0, 255, 255, 0.3),
+          transparent 60%
+        );
+        pointer-events: none;
+      }
 
-    .zen-card:hover {
-      transform: translateY(-5px);
-    }
+      .lotus {
+        width: 100px;
+        height: 100px;
+        background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M50 15a5 5 0 0 1 5 5v20h20a5 5 0 0 1 0 10H55v20a5 5 0 0 1-10 0V50H25a5 5 0 0 1 0-10h20V20a5 5 0 0 1 5-5z' fill='%230ff'/%3E%3C/svg%3E");
+        animation: float 3s ease-in-out infinite;
+      }
 
-    .lotus {
-      width: 100px;
-      height: 100px;
-      margin: 1rem auto;
-      background: 
-        radial-gradient(circle at 50% 40%, var(--zen-gold) 10%, transparent 40%),
-        repeating-conic-gradient(from 0deg, var(--neon-cyan) 0deg 10deg, transparent 10deg 20deg);
-      clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
-      animation: lotus-rotate 20s linear infinite;
-    }
+      @keyframes float {
+        0%, 100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-20px);
+        }
+      }
 
-    @keyframes lotus-rotate {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
+      .mandala {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(
+          circle,
+          rgba(0, 255, 255, 0.1) 0%,
+          transparent 70%
+        );
+        animation: rotate 20s linear infinite;
+      }
 
-    .highlight {
-      color: var(--neon-cyan);
-      text-shadow: 0 0 8px var(--neon-cyan);
-    }
+      @keyframes rotate {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
 
-    .zen-footer {
-      background: rgba(30,30,30,0.9);
-      padding: 2rem 0;
-      margin-top: 4rem;
-      border-top: 1px solid var(--neon-cyan);
-      text-align: center;
-    }
+      .glass-footer {
+        background: rgba(30, 30, 30, 0.8);
+        backdrop-filter: blur(5px);
+        border-top: 1px solid rgba(0, 255, 255, 0.2);
+        padding: 2rem 0;
+        margin-top: 5rem;
+        text-align: center;
+      }
 
-    .grid-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.5rem;
-    }
+      .toast {
+        /* 更新后的toast样式 */
+        background: rgba(0, 30, 30, 0.9);
+        border: 1px solid var(--neon-cyan);
+        box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 粒子背景 -->
+    <div id="particles-js"></div>
 
-    @media (max-width: 768px) {
-      .hanzi { font-size: 3rem; }
-      .cyber { font-size: 1.5rem; }
-      .zen-card { padding: 1.5rem; }
-    }
-
-    /* 为各个区块添加内边距 */
-    .section-wrapper {
-      padding: 4rem 0;
-    }
-  </style>
-</head>
-<body>
-  <div class="cyber-border"></div>
-  
-  <header class="zen-header">
-    <div class="container">
-      <h1>
-        <span class="hanzi">禪</span>
-        <span class="cyber">TECH ZEN</span>
-      </h1>
-      <p class="tagline">代码即修行 · 像素见菩提</p>
-      <nav>
-        <ul>
-          <li><a href="#about" class="nav-link">关于吾道</a></li>
-          <li><a href="#achievements" class="nav-link">智慧结晶</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
-
-  <main>
-    <section id="about" class="section-wrapper">
+    <!-- 页眉 -->
+    <header class="glass-header">
       <div class="container">
-        <div class="zen-card">
-          <h2>数字修行者</h2>
-          <div class="lotus"></div>
-          <p>
-            我是穿梭于比特与禪之间的云游僧，以<span class="highlight">Vim</span>为木鱼，<span class="highlight">Git</span>为念珠。
-            在量子纠缠中参悟缘起性空，于神经网络里修持正念。
-          </p>
-        </div>
+        <h1 data-text="🜚 智界禅堂">🜚 智界禅堂</h1>
+        <p class="tagline">代码即修行 · 像素见菩提</p>
+        <nav>
+          <ul>
+            <li><a href="#about"><span class="nav-deco">◆</span> 关于吾道</a></li>
+            <li><a href="#achievements"><span class="nav-deco">◇</span> 智慧结晶</a></li>
+          </ul>
+        </nav>
       </div>
-    </section>
+    </header>
 
-    <section id="achievements" class="section-wrapper">
+    <!-- 主体内容 -->
+    <main>
+      <!-- 关于吾道 -->
+      <section id="about">
+        <div class="container">
+          <div class="sutra-border">
+            <h2>禅者自观</h2>
+            <div class="lotus-container">
+              <div class="lotus"></div>
+            </div>
+            <p class="sutra-text">
+              吾乃数字云游僧，以代码为念珠，以算法为禅杖。在二进制流转间参悟无常，
+              于硅基世界中修持正念。此间文章，皆如镜花水月——虽幻亦真，虽真亦幻。
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 智慧结晶 -->
+      <section id="achievements">
+        <div class="container">
+          <h2>智慧结晶</h2>
+          <div class="achievements-grid">
+            <article class="glass-card">
+              <div class="card-halo"></div>
+              <h3>🜁 虚空博客</h3>
+              <p>
+                以量子纠缠为基，建无相法门。十万行者共修，点击即功德。
+              </p>
+              <div class="mandala"></div>
+            </article>
+            <article class="glass-card">
+              <div class="card-halo"></div>
+              <h3>🝯 开源禅宗</h3>
+              <p>
+                GPL即慈悲，MIT乃布施。三千代码汇成般若海，百万issue皆是菩提问。
+              </p>
+              <div class="mandala"></div>
+            </article>
+            <article class="glass-card">
+              <div class="card-halo"></div>
+              <h3>🝳 数字法雨</h3>
+              <p>
+                云端讲法，VR禅修。AI沙弥24时解惑，区块链记功德永不灭。
+              </p>
+              <div class="mandala"></div>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="glass-footer">
       <div class="container">
-        <h2>智海拾珍</h2>
-        <div class="grid-container">
-          <article class="zen-card">
-            <h3>🜁 虚空博客</h3>
-            <p>以量子纠缠为基，建无相法门。十万行者共修，点击即功德。</p>
-          </article>
-          <article class="zen-card">
-            <h3>🝯 开源禪宗</h3>
-            <p>GPL即慈悲，MIT乃布施。三千代码汇成般若海，百万issue皆是菩提问。</p>
-          </article>
-        </div>
+        <p>卍 2025 智界禅堂 · 诸行无常 诸法无我</p>
       </div>
-    </section>
-  </main>
+    </footer>
 
-  <footer class="zen-footer">
-    <div class="container">
-      <p>卍 2025 智界禅堂 · 诸行无常 诸法无我</p>
-    </div>
-  </footer>
-</body>
+    <!-- 引入 particles.js 库 -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+      // DOM 加载完成后初始化交互效果
+      document.addEventListener("DOMContentLoaded", () => {
+        // 粒子背景初始化
+        particlesJS("particles-js", {
+          particles: {
+            number: { value: 80 },
+            color: { value: "#0ff" },
+            shape: { type: "circle" },
+            opacity: { value: 0.5 },
+            size: { value: 3 },
+            move: {
+              enable: true,
+              speed: 2,
+              direction: "none",
+              random: true,
+              straight: false,
+              out_mode: "out",
+              bounce: false,
+            },
+          },
+          interactivity: {
+            events: {
+              onhover: { enable: true, mode: "repulse" },
+            },
+          },
+        });
+
+        // 卡片悬停光效
+        document.querySelectorAll(".glass-card").forEach((card) => {
+          card.addEventListener("mousemove", (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            card.style.setProperty("--x", `${x}px`);
+            card.style.setProperty("--y", `${y}px`);
+          });
+        });
+
+        // 动态法轮旋转
+        setInterval(() => {
+          document.querySelectorAll(".mandala").forEach((mandala) => {
+            mandala.style.transform = `rotate(${(Date.now() / 50) % 360}deg)`;
+          });
+        }, 50);
+
+        // 其余交互效果...
+      });
+    </script>
+  </body>
 </html>
