@@ -208,6 +208,14 @@
         border: 1px solid var(--neon-cyan);
         box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
       }
+
+      /* 让卡片内容整体可点击 */
+      .glass-card > a {
+        display: block;
+        text-decoration: none;
+        color: inherit;
+        height: 100%;
+      }
     </style>
   </head>
   <body>
@@ -253,22 +261,28 @@
           <h2>智慧结晶</h2>
           <div class="achievements-grid">
             <article class="glass-card">
-              <div class="card-halo"></div>
-              <h3>🜁 虚空博客</h3>
-              <p>以功德。</p>
-              <div class="mandala"></div>
+              <a href="about1.html">
+                <div class="card-halo"></div>
+                <h3>🜁 虚空博客</h3>
+                <p>以功德。</p>
+                <div class="mandala"></div>
+              </a>
             </article>
             <article class="glass-card">
-              <div class="card-halo"></div>
-              <h3>🝯 禅</h3>
-              <p>禅法。</p>
-              <div class="mandala"></div>
+              <a href="about2.html">
+                <div class="card-halo"></div>
+                <h3>🝯 禅</h3>
+                <p>禅法。</p>
+                <div class="mandala"></div>
+              </a>
             </article>
             <article class="glass-card">
-              <div class="card-halo"></div>
-              <h3>🝳 法</h3>
-              <p>功德。</p>
-              <div class="mandala"></div>
+              <a href="about3.html">
+                <div class="card-halo"></div>
+                <h3>🝳 法</h3>
+                <p>功德。</p>
+                <div class="mandala"></div>
+              </a>
             </article>
           </div>
         </div>
