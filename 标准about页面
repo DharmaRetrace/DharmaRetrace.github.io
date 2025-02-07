@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>我的 Notion 成果</title>
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Roboto:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* 重置默认样式 */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background: #1e1e2f;
+        font-family: 'Roboto', sans-serif;
+        color: #fff;
+        line-height: 1.6;
+      }
+
+      .container {
+        max-width: 960px;
+        margin: 0 auto;
+        padding: 40px 20px;
+      }
+
+      header {
+        text-align: center;
+        margin-bottom: 40px;
+      }
+
+      header h1 {
+        font-family: 'Libre Baskerville', serif;
+        font-size: 48px;
+        margin-bottom: 10px;
+      }
+
+      header p {
+        font-size: 18px;
+        color: #aaa;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 20px;
+      }
+
+      .card {
+        background: #2a2a3d;
+        padding: 20px;
+        border-radius: 8px;
+        transition: transform 0.3s, box-shadow 0.3s;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      }
+
+      .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+      }
+
+      .card a {
+        display: block;
+        text-decoration: none;
+        color: inherit;
+        height: 100%;
+      }
+
+      .card h3 {
+        font-family: 'Libre Baskerville', serif;
+        font-size: 24px;
+        margin-bottom: 10px;
+      }
+
+      .card p {
+        font-size: 16px;
+        color: #ccc;
+      }
+
+      footer {
+        text-align: center;
+        margin-top: 40px;
+        border-top: 1px solid #444;
+        padding-top: 20px;
+        font-size: 14px;
+        color: #aaa;
+      }
+
+      @media (max-width: 480px) {
+        header h1 {
+          font-size: 36px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>我的 Notion 成果</h1>
+        <p>点击下方卡片查看我在 Notion 上公开的成果链接</p>
+      </header>
+      <section class="grid">
+        <article class="card">
+          <a href="https://www.notion.so/your-public-link-1" target="_blank">
+            <h3>成果 1</h3>
+            <p>
+              描述：这是我的第一个项目，展示了我在 Notion 上公开的成果简介。
+            </p>
+          </a>
+        </article>
+        <article class="card">
+          <a href="https://www.notion.so/your-public-link-2" target="_blank">
+            <h3>成果 2</h3>
+            <p>
+              描述：该项目详细描述了项目背景及实现过程，欢迎点击了解更多。
+            </p>
+          </a>
+        </article>
+        <article class="card">
+          <a href="https://www.notion.so/your-public-link-3" target="_blank">
+            <h3>成果 3</h3>
+            <p>
+              描述：这是另一项重要成果，包含项目亮点与拓展思路的详细介绍。
+            </p>
+          </a>
+        </article>
+        <article class="card">
+          <a href="https://www.notion.so/your-public-link-4" target="_blank">
+            <h3>成果 4</h3>
+            <p>
+              描述：更多的创意和见解尽在此项目中，点击链接获取完整内容。
+            </p>
+          </a>
+        </article>
+      </section>
+      <footer>
+        <p>&copy; 2025 我的 Notion 成果</p>
+      </footer>
+    </div>
+  </body>
+</html>
