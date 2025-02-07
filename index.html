@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>智界禅堂 | 科技与佛法的交响</title>
+    <title>素心居 | 科技与玄学</title>
     <!-- Google Fonts -->
     <link
       href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Noto+Sans+SC:wght@300;500&family=Srisakdi&display=swap"
@@ -50,7 +50,11 @@
 
       .glass-header {
         position: relative;
-        background: linear-gradient(135deg, rgba(30, 30, 30, 0.9) 0%, rgba(42, 42, 42, 0.7) 100%);
+        background: linear-gradient(
+          135deg,
+          rgba(30, 30, 30, 0.9) 0%,
+          rgba(42, 42, 42, 0.7) 100%
+        );
         backdrop-filter: blur(10px);
         border-bottom: 1px solid rgba(0, 255, 255, 0.2);
         box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
@@ -59,7 +63,6 @@
         z-index: 2;
       }
 
-      /* 更新后的标题样式：使用渐变背景和动画 */
       .glass-header h1 {
         font-family: 'Orbitron', sans-serif;
         font-size: 4rem;
@@ -88,42 +91,12 @@
         }
       }
 
+      /* 修改 tagline 字体设置为宋体 */
       .tagline {
-        font-family: 'Srisakdi', cursive;
+        font-family: "宋体", SimSun, serif;
         font-size: 1.5rem;
         color: var(--mantra-gold);
         margin-bottom: 2rem;
-      }
-
-      nav ul {
-        display: flex;
-        justify-content: center;
-        gap: 2rem;
-        padding: 1rem;
-      }
-
-      nav a {
-        color: var(--stardust);
-        text-decoration: none;
-        font-size: 1.1rem;
-        position: relative;
-        padding: 0.5rem 1rem;
-        transition: all 0.3s ease;
-      }
-
-      nav a::before {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 0;
-        height: 2px;
-        background: var(--neon-cyan);
-        transition: width 0.3s;
-      }
-
-      nav a:hover::before {
-        width: 100%;
       }
 
       .glass-card {
@@ -149,7 +122,11 @@
         width: 100%;
         height: 100%;
         border-radius: 15px;
-        background: radial-gradient(circle at 50% 0%, rgba(0, 255, 255, 0.3), transparent 60%);
+        background: radial-gradient(
+          circle at 50% 0%,
+          rgba(0, 255, 255, 0.3),
+          transparent 60%
+        );
         pointer-events: none;
       }
 
@@ -173,7 +150,11 @@
         position: absolute;
         width: 100%;
         height: 100%;
-        background: radial-gradient(circle, rgba(0, 255, 255, 0.1) 0%, transparent 70%);
+        background: radial-gradient(
+          circle,
+          rgba(0, 255, 255, 0.1) 0%,
+          transparent 70%
+        );
         animation: rotate 20s linear infinite;
       }
 
@@ -199,7 +180,7 @@
         backdrop-filter: blur(5px);
         border-top: 1px solid rgba(0, 255, 255, 0.2);
         padding: 2rem 0;
-        margin-top: 5rem;
+        margin-top: 0.05rem; /* 原 margin-top: 5rem 改为 0.05rem，使友情链接与蓝色装饰区域贴近蓝线 */
         text-align: center;
       }
 
@@ -216,6 +197,57 @@
         color: inherit;
         height: 100%;
       }
+
+      /* 新增：推荐栏样式 */
+      #recommendations {
+        background: rgba(30, 30, 30, 0.8);
+        padding: 2rem 0;
+        margin-top: 2rem;
+        text-align: center;
+      }
+
+      #recommendations h2 {
+        margin-bottom: 1rem;
+        font-family: 'Orbitron', sans-serif;
+        font-size: 2rem;
+        background: linear-gradient(45deg, #0ff, #3d5afe, #ffd700);
+        background-size: 200% auto;
+        color: transparent;
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .recommendations-list {
+        list-style: none;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      .recommendations-list li {
+        margin: 0 1rem;
+        font-size: 1.2rem;
+      }
+
+      .recommendations-list a {
+        color: var(--stardust);
+        text-decoration: none;
+        transition: color 0.3s;
+      }
+
+      .recommendations-list a:hover {
+        color: var(--neon-cyan);
+      }
+
+      /* 新增：装饰性小点区域 */
+      .decorative-dots {
+        width: 100%;
+        height: 50px;
+        background: radial-gradient(circle, var(--neon-cyan) 1px, transparent 1px);
+        background-size: 10px 10px;
+      }
     </style>
   </head>
   <body>
@@ -225,36 +257,13 @@
     <!-- 页眉 -->
     <header class="glass-header">
       <div class="container">
-        <!-- 去掉前缀符号，使用新的美观标题 -->
-        <h1 data-text="智界禅堂">智界禅堂</h1>
-        <p class="tagline">生活与修行 · 三藐三菩提</p>
-        <nav>
-          <ul>
-            <li><a href="#about"><span class="nav-deco">◆</span> 关于吾道</a></li>
-            <li><a href="#achievements"><span class="nav-deco">◇</span> 智慧结晶</a></li>
-          </ul>
-        </nav>
+        <h1 data-text="素心居">素心居</h1>
+        <p class="tagline">佛学•UFO•AI</p>
       </div>
     </header>
 
     <!-- 主体内容 -->
     <main>
-      <!-- 关于吾道 -->
-      <section id="about">
-        <div class="container">
-          <div class="sutra-border">
-            <h2>禅者自观</h2>
-            <div class="lotus-container">
-              <div class="lotus"></div>
-            </div>
-            <p class="sutra-text">
-              无常。<br />
-              正念。
-            </p>
-          </div>
-        </div>
-      </section>
-
       <!-- 智慧结晶 -->
       <section id="achievements">
         <div class="container">
@@ -263,36 +272,51 @@
             <article class="glass-card">
               <a href="about1.html">
                 <div class="card-halo"></div>
-                <h3>🜁 虚空博客</h3>
-                <p>以功德。</p>
+                <h3>溯空余韵</h3>
+                <p>主要内容为佛学知识、原始佛教知识、佛法探究等等</p>
                 <div class="mandala"></div>
               </a>
             </article>
             <article class="glass-card">
               <a href="about2.html">
                 <div class="card-halo"></div>
-                <h3>🝯 禅</h3>
-                <p>禅法。</p>
+                <h3>玄幽异录</h3>
+                <p>主要内容为UFO、UAP、天文学、宇宙学等等</p>
                 <div class="mandala"></div>
               </a>
             </article>
             <article class="glass-card">
               <a href="about3.html">
                 <div class="card-halo"></div>
-                <h3>🝳 法</h3>
-                <p>功德。</p>
+                <h3>机心探微</h3>
+                <p>主要内容为科技发展、AI资讯等等</p>
                 <div class="mandala"></div>
               </a>
             </article>
           </div>
         </div>
       </section>
+
+      <!-- 推荐栏 -->
+      <section id="recommendations">
+        <div class="container">
+          <h2>友情链接</h2>
+          <ul class="recommendations-list">
+            <li><a href="http://example.com">同道网</a></li>
+            <li><a href="http://example.org">玄学汇</a></li>
+            <li><a href="http://example.net">佛学村</a></li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- 装饰性小点区域 -->
+      <div class="decorative-dots"></div>
     </main>
 
     <!-- 页脚 -->
     <footer class="glass-footer">
       <div class="container">
-        <p>卍 2025 智界禅堂</p>
+        <p>卍 © 2025 素心居 卍</p>
       </div>
     </footer>
 
