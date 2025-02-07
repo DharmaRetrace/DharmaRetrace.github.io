@@ -3,13 +3,19 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>我的 Notion 成果</title>
+    <title>机心探微 - 我的 Notion 成果</title>
     <!-- Google Fonts -->
     <link
-      href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Roboto:wght@400;500&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Roboto:wght@400;500&family=Orbitron:wght@400;500;700&display=swap"
       rel="stylesheet"
     />
     <style>
+      :root {
+        --primary-color: #00ccff;
+        --bg-dark: #121212;
+        --bg-main: #1e1e2f;
+      }
+
       /* 重置默认样式 */
       * {
         margin: 0;
@@ -18,7 +24,8 @@
       }
 
       body {
-        background: #1e1e2f;
+        /* 使用径向渐变打造未来感背景 */
+        background: radial-gradient(ellipse at top, var(--bg-main), var(--bg-dark));
         font-family: 'Roboto', sans-serif;
         color: #fff;
         line-height: 1.6;
@@ -36,9 +43,11 @@
       }
 
       header h1 {
-        font-family: 'Libre Baskerville', serif;
+        /* 使用未来感的 Orbitron 字体，并加上霓虹灯光效果 */
+        font-family: 'Orbitron', sans-serif;
         font-size: 48px;
         margin-bottom: 10px;
+        text-shadow: 0 0 10px var(--primary-color), 0 0 20px var(--primary-color);
       }
 
       header p {
@@ -53,16 +62,19 @@
       }
 
       .card {
-        background: #2a2a3d;
+        /* 使用渐变背景和轻微阴影打造科幻卡片效果 */
+        background: linear-gradient(135deg, #2a2a3d, #24243e);
         padding: 20px;
         border-radius: 8px;
-        transition: transform 0.3s, box-shadow 0.3s;
+        transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        border: 1px solid transparent;
       }
 
       .card:hover {
         transform: translateY(-5px);
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        border: 1px solid var(--primary-color);
+        box-shadow: 0 0 20px rgba(0, 204, 255, 0.5);
       }
 
       .card a {
@@ -76,6 +88,7 @@
         font-family: 'Libre Baskerville', serif;
         font-size: 24px;
         margin-bottom: 10px;
+        text-shadow: 0 0 5px var(--primary-color);
       }
 
       .card p {
@@ -102,40 +115,33 @@
   <body>
     <div class="container">
       <header>
-        <h1>我的 Notion 成果</h1>
+        <!-- 将页头标题由 "AI-科技" 修改为 "机心探微" -->
+        <h1>机心探微</h1>
         <p>点击下方卡片查看我在 Notion 上公开的成果链接</p>
       </header>
       <section class="grid">
         <article class="card">
-          <a href="https://www.notion.so/your-public-link-1" target="_blank">
-            <h3>成果 1</h3>
-            <p>
-              描述：这是我的第一个项目，展示了我在 Notion 上公开的成果简介。
-            </p>
+          <a href="https://sky-dichondra-5ae.notion.site/AI-4ef22d5d015b426ea628e8a577440227?pvs=4" target="_blank">
+            <h3>AI模型参数量（many guess）</h3>
+            <p>描述：有关AI大模型参数量。</p>
           </a>
         </article>
         <article class="card">
           <a href="https://www.notion.so/your-public-link-2" target="_blank">
             <h3>成果 2</h3>
-            <p>
-              描述：该项目详细描述了项目背景及实现过程，欢迎点击了解更多。
-            </p>
+            <p>描述：该项目详细描述了项目背景及实现过程，欢迎点击了解更多。</p>
           </a>
         </article>
         <article class="card">
           <a href="https://www.notion.so/your-public-link-3" target="_blank">
             <h3>成果 3</h3>
-            <p>
-              描述：这是另一项重要成果，包含项目亮点与拓展思路的详细介绍。
-            </p>
+            <p>描述：这是另一项重要成果，包含项目亮点与拓展思路的详细介绍。</p>
           </a>
         </article>
         <article class="card">
           <a href="https://www.notion.so/your-public-link-4" target="_blank">
             <h3>成果 4</h3>
-            <p>
-              描述：更多的创意和见解尽在此项目中，点击链接获取完整内容。
-            </p>
+            <p>描述：更多的创意和见解尽在此项目中，点击链接获取完整内容。</p>
           </a>
         </article>
       </section>
