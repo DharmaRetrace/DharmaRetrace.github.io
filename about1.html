@@ -16,7 +16,7 @@
         padding: 0;
         box-sizing: border-box;
       }
-      
+
       body {
         /* 淡雅的渐变背景，营造出禅意和古典气息 */
         background: linear-gradient(135deg, #faf3e0, #f1eed9);
@@ -24,35 +24,63 @@
         color: #333;
         line-height: 1.6;
       }
-      
+
       .container {
         max-width: 960px;
         margin: 0 auto;
         padding: 40px 20px;
       }
-      
+
       header {
         text-align: center;
         margin-bottom: 40px;
       }
-      
+
       header h1 {
         font-family: 'Noto Serif SC', serif;
         font-size: 48px;
         margin-bottom: 10px;
       }
-      
+
       header p {
         font-size: 18px;
         color: #777;
       }
-      
+
+      /* 美化回到首页按钮 */
+      .back-to-home {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      .back-to-home button {
+        background: linear-gradient(45deg, #FFD54F, #FFC107);
+        border: none;
+        color: #fff;
+        font-size: 16px;
+        padding: 12px 30px;
+        border-radius: 30px;
+        cursor: pointer;
+        transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      .back-to-home button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+      }
+
+      .back-to-home button:active {
+        transform: translateY(0);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
       .grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
         gap: 20px;
       }
-      
+
       .card {
         background: #fff;
         border: 1px solid #e0e0e0;
@@ -61,30 +89,30 @@
         transition: transform 0.3s, box-shadow 0.3s;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
       }
-      
+
       .card:hover {
         transform: translateY(-3px);
         box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
       }
-      
+
       .card a {
         display: block;
         text-decoration: none;
         color: inherit;
         height: 100%;
       }
-      
+
       .card h3 {
         font-family: 'Noto Serif SC', serif;
         font-size: 24px;
         margin-bottom: 10px;
       }
-      
+
       .card p {
         font-size: 16px;
         color: #555;
       }
-      
+
       footer {
         text-align: center;
         margin-top: 40px;
@@ -93,7 +121,7 @@
         font-size: 14px;
         color: #666;
       }
-      
+
       @media (max-width: 480px) {
         header h1 {
           font-size: 36px;
@@ -107,6 +135,10 @@
         <h1>溯空余韵</h1>
         <p>佛学知识、原始佛教知识、佛法探究等等</p>
       </header>
+      <!-- 回到首页按钮 -->
+      <div class="back-to-home">
+        <button onclick="window.location.href='index.html'">回到首页</button>
+      </div>
       <section class="grid">
         <!-- 八正道最适合翻译 -->
         <article class="card">
